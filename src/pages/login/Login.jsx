@@ -55,15 +55,16 @@ const Login = () => {
           </div>
         </div> */}
 
-        <form className="login__form" onSubmit={onLoginSubmit}>
-          <div className="landing__logo__container">
-            <Logo className="landing__logo" /> DroneZone
-          </div>
+        <div className="landing__logo__container landing__logo__container--mob">
+          <Logo className="landing__logo" /> DroneZone
+        </div>
 
-          <span className="login__form__title">
+        <form className="login__form" onSubmit={onLoginSubmit}>
+          <span className="login__form__title ">
             Log In
             <span className="login__form__title__dot">.</span>
           </span>
+
           <span className="login__form__subtitle">
             Don't have an account ?{' '}
             <span
@@ -97,6 +98,16 @@ const Login = () => {
 
           <button className="login__form__btn">Create Account</button>
         </form>
+
+        <span className="login__form__subtitle login__form__subtitle--mob">
+          Don't have an account ?{' '}
+          <span
+            onClick={() => navigate('/signup')}
+            className="login__form__subtitle__login"
+          >
+            Sign Up
+          </span>
+        </span>
       </div>
     </div>
   )

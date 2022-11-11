@@ -46,6 +46,10 @@
       color: #5dd5a8;
       transform: translateX(-1rem);
     }
+
+    &--mob {
+      display: none;
+    }
   }
 
   &__about {
@@ -165,10 +169,12 @@
 
   .login__container {
     height: 100%;
+
+    justify-content: space-evenly !important;
   }
 
   .login__form {
-    height: 100%;
+    // height: 100%;
     width: 85% !important;
     gap: 3rem !important;
 
@@ -182,6 +188,10 @@
 
   .login__form__subtitle {
     font-size: 1.5rem;
+
+    &--mob {
+      display: none;
+    }
   }
 
   .input__field {
@@ -197,5 +207,17 @@
     width: 100% !important;
     height: 5rem !important;
     border-radius: 1rem !important;
+  }
+
+  .login__form__subtitle {
+    display: none;
+  }
+
+  .login__form__subtitle--mob {
+    display: block;
+  }
+
+  .landing__logo__container--mob {
+    display: flex;
   }
 }

@@ -37,11 +37,11 @@ const SignUp = () => {
       <Illustration className="landing__illustration" />
 
       <div className="login__container">
-        <form className="login__form" onSubmit={onSignUpSubmit}>
-          <div className="landing__logo__container">
-            <Logo className="landing__logo" /> DroneZone
-          </div>
+        <div className="landing__logo__container landing__logo__container--mob">
+          <Logo className="landing__logo" /> DroneZone
+        </div>
 
+        <form className="login__form" onSubmit={onSignUpSubmit}>
           <span className="login__form__title">
             Create new acount
             <span className="login__form__title__dot">.</span>
@@ -94,6 +94,16 @@ const SignUp = () => {
 
           <button className="login__form__btn">Create Account</button>
         </form>
+
+        <span className="login__form__subtitle login__form__subtitle--mob">
+          Already a member ?{' '}
+          <span
+            onClick={() => navigate('/login')}
+            className="login__form__subtitle__login"
+          >
+            Log in
+          </span>
+        </span>
       </div>
     </div>
   )

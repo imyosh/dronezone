@@ -5,6 +5,7 @@ import { ReactComponent as Stars } from '../../svg/stars.svg'
 import { ReactComponent as Shaps } from '../../svg/shaps.svg'
 import { ReactComponent as Illustration } from '../../svg/illustration.svg'
 
+import { ReactComponent as Logo } from '../../svg/logo.svg'
 import { ReactComponent as Eye } from '../../svg/eye.svg'
 import { ReactComponent as EyeSalsh } from '../../svg/eye-slash.svg'
 import { ReactComponent as Envelope } from '../../svg/envelope.svg'
@@ -37,6 +38,10 @@ const SignUp = () => {
 
       <div className="login__container">
         <form className="login__form" onSubmit={onSignUpSubmit}>
+          <div className="landing__logo__container">
+            <Logo className="landing__logo" /> DroneZone
+          </div>
+
           <span className="login__form__title">
             Create new acount
             <span className="login__form__title__dot">.</span>

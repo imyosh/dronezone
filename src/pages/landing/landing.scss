@@ -1,0 +1,171 @@
+.landing {
+  height: 100%;
+
+  background-image: linear-gradient(
+    180deg,
+    rgba(94, 213, 168, 0) 20.83%,
+    rgba(94, 213, 168, 0.15) 100%
+  );
+
+  &__illustration {
+    width: 15rem;
+    height: 90%;
+  }
+
+  &__stars {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+  }
+
+  &__shaps {
+    width: 30%;
+    height: min-content;
+    position: absolute;
+    left: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__illustration {
+    position: absolute;
+    right: 6%;
+    top: 2rem;
+    width: 40%;
+  }
+
+  &__logo {
+    width: 7rem;
+    height: 7rem;
+    &__container {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      font-size: 4.5rem;
+      color: #5dd5a8;
+      transform: translateX(-1rem);
+    }
+  }
+
+  &__about {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 35rem;
+    position: absolute;
+    top: 25%;
+    left: 14%;
+
+    color: #fff;
+    font-weight: bold;
+
+    &__description {
+      color: #777777;
+      font-size: 1.55rem;
+    }
+
+    &__head {
+      font-size: 2rem;
+    }
+
+    &__btn {
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1a232a;
+      color: #5dd5a8;
+      height: 5rem;
+      width: 17rem;
+      border-radius: 3.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding-left: 4.4rem;
+      font-size: 1.4rem;
+      position: relative;
+
+      &__c {
+        position: absolute;
+        left: 0;
+        background: #fff;
+        height: 5rem;
+        width: 5rem;
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s;
+
+        &__icon {
+          width: 3rem;
+          height: 3rem;
+          transform: rotate(20deg);
+          transition: transform 0.3s;
+        }
+      }
+
+      &:hover {
+        background: #1a232ac2;
+        color: #fff;
+
+        .landing__about__btn__c {
+          transform: scale(1.1);
+          &__icon {
+            transform: rotate(0);
+          }
+        }
+      }
+    }
+  }
+
+  &__form {
+    position: absolute;
+    top: 25%;
+    left: 14%;
+  }
+}
+
+@media screen and (max-height: 600px), screen and (max-width: 850px) {
+  .landing__illustration {
+    display: none;
+  }
+
+  .landing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .landing__about {
+    position: initial;
+    transform: scale(0.9);
+  }
+
+  .landing__stars {
+    width: 100%;
+  }
+
+  .login__container {
+    position: initial !important;
+    width: 100%;
+  }
+}
+
+@media screen and (max-height: 600px), screen and (max-width: 414px) {
+  .landing__about {
+    align-items: center;
+    gap: 3rem;
+  }
+  .landing__about__description {
+    text-align: center;
+  }
+
+  .login__form {
+    width: 80% !important;
+  }
+  .login__form__title {
+    font-size: 2.5rem !important;
+  }
+}

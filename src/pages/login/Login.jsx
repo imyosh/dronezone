@@ -96,7 +96,7 @@ const Login = () => {
             Icon2={EyeSalsh}
           />
 
-          <button className="login__form__btn">Create Account</button>
+          <button className="login__form__btn">Log In</button>
         </form>
 
         <span className="login__form__subtitle login__form__subtitle--mob">

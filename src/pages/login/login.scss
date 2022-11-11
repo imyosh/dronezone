@@ -6,6 +6,10 @@
     rgba(94, 213, 168, 0.15) 100%
   );
 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,6 +102,10 @@
         &:hover {
           color: rgb(71, 240, 175);
         }
+      }
+
+      &--mob {
+        display: none;
       }
     }
 

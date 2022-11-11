@@ -73,6 +73,7 @@ const Login = () => {
             id="email"
             label="Email"
             type="email"
+            placeholder="Enter your email"
             register={register}
             errors={errors}
             Icon={Envelope}
@@ -82,6 +83,7 @@ const Login = () => {
             id="password"
             label="Password"
             type="password"
+            placeholder="Enter your password"
             register={register}
             errors={errors}
             Icon={Eye}

@@ -6,7 +6,7 @@ const FormField = ({
   label,
   placeholder,
   register,
-  errors,
+  error,
   Icon,
   Icon2,
   type,
@@ -15,19 +15,20 @@ const FormField = ({
   const [passwordShown, setPasswordShown] = useState(false)
 
   return (
-    <div className="input__group">
+    <div className={`input__group ${error && 'input--invaild'}`}>
       <label htmlFor={id} className="input__label">
         {label}
       </label>
       <input
-        {...register(id, { required: true, minLength: 3 })}
+        {...register}
         id={id}
         placeholder={placeholder}
         className="input__field input__field--normal"
         spellCheck="false"
         {...inputProps}
-        autoComplete="false"
+        autoComplete="off"
         onInvalid={(e) => e.preventDefault()}
+        type={type}
         {...(id === 'password'
           ? { type: passwordShown ? 'text' : 'password' }
           : {})}
@@ -50,9 +51,9 @@ const FormField = ({
             className="input__icon input__icon--eye"
           />
         )
-      ) : (
+      ) : Icon ? (
         <Icon className="input__icon" />
-      )}
+      ) : null}
     </div>
   )
 }

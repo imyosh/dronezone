@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './login.scss'
 
 import { ReactComponent as Stars } from '../../svg/stars.svg'
@@ -11,22 +11,57 @@ import { ReactComponent as EyeSalsh } from '../../svg/eye-slash.svg'
 import { ReactComponent as Envelope } from '../../svg/envelope.svg'
 
 import { useForm } from 'react-hook-form'
-
-import FormField from '../../components/formInput/FormInput'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { connect } from 'react-redux'
+import { setUser } from '../../redux/components/user/userSlice'
 
-const Login = () => {
+import FormField from '../../components/formInput/FormInput'
+import RequstButton from '../../components/requestButton/RequstButton'
+
+const schema = yup
+  .object({
+    email: yup.string().email().required(),
+    password: yup.string().min(6).required(),
+  })
+  .required()
+
+const Login = ({ setUser }) => {
+  const [isPushing, setIspushing] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(null)
+
   const navigate = useNavigate()
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm()
+  } = useForm({ resolver: yupResolver(schema) })
 
   const onLoginSubmit = handleSubmit((data, e) => {
     console.log(data)
+
+    setIspushing(true)
+    setIsSuccess(null)
+
+    axios
+      .post('/api/users/login', data)
+      .then((res) => {
+        console.log(res)
+
+        setUser(res.data)
+        setIspushing(false)
+        setIsSuccess(true)
+        navigate('/dashboard/home')
+      })
+      .catch((err) => {
+        console.log(err)
+        setIspushing(false)
+        setIsSuccess(false)
+      })
   })
 
   return (
@@ -76,27 +111,31 @@ const Login = () => {
           </span>
 
           <FormField
+            register={register('email', { required: true })}
             id="email"
             label="Email"
-            type="email"
+            type="text"
             placeholder="Enter your email"
-            register={register}
-            errors={errors}
+            error={errors.email}
             Icon={Envelope}
           />
 
           <FormField
+            register={register('password', { required: true })}
             id="password"
             label="Password"
-            type="password"
+            type="text"
             placeholder="Enter your password"
-            register={register}
-            errors={errors}
+            error={errors.password}
             Icon={Eye}
             Icon2={EyeSalsh}
           />
 
-          <button className="login__form__btn">Log In</button>
+          <RequstButton
+            isLoading={isPushing}
+            isSuccess={isSuccess}
+            label="Log In"
+          />
         </form>
 
         <span className="login__form__subtitle login__form__subtitle--mob">
@@ -113,4 +152,6 @@ const Login = () => {
   )
 }
 
-export default Login
+const mapDispatchToProps = { setUser }
+
+export default connect(null, mapDispatchToProps)(Login)

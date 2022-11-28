@@ -3,11 +3,23 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
+import { Provider } from 'react-redux'
+import { store } from './redux/store/store'
+
+import Axios from 'axios'
+
+// Axios.defaults.baseURL = 'http://18.117.221.18:8080'
+Axios.defaults.baseURL = 'http://localhost:8868'
+
+window.rr = () => store.getState()
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
+  // <React>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>
+  </Provider>
+  // </React>
 )
 
 // If you want to start measuring performance in your app, pass a function

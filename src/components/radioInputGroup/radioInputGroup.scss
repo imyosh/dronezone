@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:400'");
+$white: #fff;
+$green: #5dd5a8;
+
+.radioInputGroup {
+  width: 100%;
+  text-align: center;
+
+  display: flex;
+  gap: 2rem;
+
+  input[type='radio'] {
+    display: none;
+    &:checked {
+      + .box {
+        background-color: $green;
+        border: solid 1px $green;
+
+        span {
+          color: white;
+        }
+      }
+    }
+  }
+  .box {
+    width: max-content;
+    padding: 0.4rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+
+    background: transparent;
+    border: solid 1px gray;
+    transition: all 250ms ease;
+
+    will-change: transition;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    font-weight: 900;
+    font-size: 1.1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+
+    &:active {
+      transform: translateY(5px);
+    }
+  }
+}

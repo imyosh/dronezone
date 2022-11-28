@@ -108,21 +108,36 @@
         display: none;
       }
     }
+  }
 
-    &__btn {
-      width: 12.5rem;
-      height: 3.5rem;
-      border-radius: 0.5rem;
-      background: #5ed5a8;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      margin-top: 1.6rem;
-      transition: filter 0.3s;
+  &__get {
+    background: #161c22;
+    color: #fff;
+    border: solid 1px #447a66;
+    width: 10rem;
+    height: 3.5rem;
+    letter-spacing: 1px;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    transition: background 0.3s;
+    margin-top: auto;
 
-      &:hover {
-        filter: brightness(80%);
-      }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    transition: filter 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(80%);
+    }
+
+    &__icon {
+      width: 2rem;
+      height: 2rem;
+      fill: #c4c4c4;
     }
   }
 }

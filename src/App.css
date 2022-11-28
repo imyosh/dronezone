@@ -52,3 +52,8 @@ body {
   src: URL('./fonts/Poppins-SemiBold.ttf') format('truetype');
   font-weight: 600;
 }
+
+.disable {
+  pointer-events: none;
+  background: lightgray !important;
+}

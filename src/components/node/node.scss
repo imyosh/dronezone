@@ -1,0 +1,110 @@
+.node {
+  width: 16rem;
+  height: 22rem;
+
+  background: #ffffff;
+  border-radius: 1rem;
+  overflow: hidden;
+  color: #6b6b6b;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  gap: 1.5rem;
+  position: relative;
+  border-bottom: solid 1px #ffffff;
+
+  box-shadow: 0px 4px 4px rgba($color: #000000, $alpha: 0.1);
+
+  transition: border-bottom 0.3s;
+
+  &:hover {
+    border-bottom: solid 1px #5dd5a8;
+
+    &::after {
+      background: #5dd5a8;
+    }
+  }
+
+  &::after {
+    content: ' ';
+    width: 7rem;
+    height: 1px;
+    background: rgba(128, 128, 128, 0.404);
+
+    position: absolute;
+    top: 27%;
+    transition: background 0.3s;
+  }
+
+  &__icon {
+    width: 4rem;
+    height: 4rem;
+    fill: #5dd5a8;
+  }
+
+  &__info {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: space-evenly;
+
+    &__instock {
+      color: #62af77;
+    }
+
+    &__outstock {
+      color: #ae4546;
+    }
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      fill: #424242;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
+  &__btn {
+    &__icon {
+      width: 1.75rem;
+      height: 1.75rem;
+      fill: #bebebe;
+    }
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: 0.35rem;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    // background: #e5e5e5;
+    border: solid 1px #bebebe;
+
+    color: #bebebe;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background: #fc626e;
+      border: solid 1px #fc626e;
+      color: #fff;
+
+      .node__btn__icon {
+        fill: #fff;
+      }
+    }
+  }
+}

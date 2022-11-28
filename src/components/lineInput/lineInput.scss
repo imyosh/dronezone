@@ -1,0 +1,96 @@
+$main-color: #f44336;
+$secondary-color: white;
+$main-color: #333;
+$secondary-color: #5dd5a8;
+$width: 20rem; // Change Me
+
+.lineInput {
+  width: 90%;
+  height: calc($width / 5);
+  overflow: hidden;
+  position: relative;
+
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  &__input {
+    display: block;
+    width: 100%;
+    padding-top: calc($width / 15);
+    border: none;
+    border-radius: 0; // For iOS
+    padding-bottom: 0.5rem;
+    // border-bottom: solid calc($width / 15)0 rgba(white, .5);
+    color: white;
+    background: transparent;
+    font-size: calc($width / 15);
+    transition: 0.3s ease;
+
+    &::placeholder {
+      color: transparent;
+    }
+
+    &:not(:placeholder-shown) {
+      ~ label {
+        top: 0;
+        font-size: 1.5rem;
+        font-weight: bold;
+
+        color: $secondary-color;
+      }
+    }
+
+    &:focus {
+      outline: none;
+      // border-bottom-color: $secondary-color;
+      ~ label {
+        top: 0;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: $secondary-color;
+      }
+
+      ~ .bar:before {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 2rem;
+    color: #d7d7d7;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: text;
+    transition: 0.25s ease;
+  }
+
+  &__bar {
+    // background: $secondary-color;
+    background: rgba(white, 0.5);
+    content: '';
+    width: 100%;
+    // height: $width/100;
+    height: 1px;
+    // transform: translateX(-100%);
+    transition: 0.3s ease;
+    // margin-top: -2px;
+    //
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 150%;
+      background: $secondary-color;
+      transform: translateX(-100%);
+    }
+  }
+
+  &::selection {
+    background: rgba($secondary-color, 0.3);
+  }
+}

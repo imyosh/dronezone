@@ -10,10 +10,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import Axios from 'axios'
 
-import { ReactComponent as Logo } from '../src/svg/logo.svg'
-
-// Axios.defaults.baseURL = 'http://18.117.221.18:8080'
-Axios.defaults.baseURL = 'http://localhost:8868'
+Axios.defaults.baseURL = 'https://dull-pink-turtle-hat.cyclic.app'
+// Axios.defaults.baseURL = 'http://localhost:8868'
 
 window.rr = () => store.getState()
 

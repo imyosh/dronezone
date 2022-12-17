@@ -93,7 +93,7 @@ const ExportItemModal = ({ addExport, updateExport }) => {
       }
       setIsOpen(true)
     }
-  }, [])
+  }, [reset])
 
   return (
     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>

@@ -168,8 +168,6 @@ const Login = ({ setUser }) => {
             Icon2={EyeSalsh}
           />
 
-          <input></input>
-
           <RequstButton
             isLoading={isPushing}
             isSuccess={isSuccess}

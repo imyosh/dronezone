@@ -1,5 +1,7 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { AuthProvider, RequireAuth } from 'react-auth-kit'
+
 import './App.css'
 
 import NotifyModal from './components/notifiyModal/NotifyModal'
@@ -16,19 +18,34 @@ import Dashboard from './pages/dashboard/Dashboard'
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <NotifyModal />
-        <LoadingModal />
-        <ConfirmModal />
-        <RequestModal />
-        <InfoModal />
-        <Routes>
-          <Route path="/" element={<Landing />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/dashboard/*" element={<Dashboard />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider
+        authType="cookie"
+        authName={'_auth'}
+        cookieDomain={window.location.hostname}
+        cookieSecure={window.location.protocol === 'https:'}
+      >
+        <BrowserRouter>
+          <NotifyModal />
+          <LoadingModal />
+          <ConfirmModal />
+          <RequestModal />
+          <InfoModal />
+          <Routes>
+            <Route path="/" element={<Landing />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/signup" element={<SignUp />}></Route>
+            <Route
+              path="/dashboard/*"
+              element={
+                <RequireAuth loginPath={'/login'}>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route path="*" element={<Navigate to="/login" />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   )
 }

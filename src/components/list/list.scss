@@ -52,14 +52,12 @@
 }
 
 ::-webkit-scrollbar {
-  width: 0.9rem;
+  width: 0.4rem;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
   border-radius: 2px;
-  background: #1e212e;
-
   scroll-padding-left: 2rem;
 }
 
@@ -68,7 +66,7 @@
   border-radius: 1rem;
   padding: 0.1rem;
   margin: 0.1rem;
-  background: #c1c1c1;
+  background: #5ed5a8;
   background-position: center;
 }
 

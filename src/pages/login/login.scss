@@ -140,4 +140,16 @@
       fill: #c4c4c4;
     }
   }
+
+  &__error {
+    color: #fc626e;
+    text-align: center;
+    font-weight: bold;
+    transition: opacity 0.3s;
+    opacity: 0;
+
+    &--show {
+      opacity: 1;
+    }
+  }
 }

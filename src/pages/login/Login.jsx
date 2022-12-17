@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './login.scss'
+
+import { useSignIn, useIsAuthenticated } from 'react-auth-kit'
 
 import { ReactComponent as Stars } from '../../svg/stars.svg'
 import { ReactComponent as Shaps } from '../../svg/shaps.svg'
@@ -30,10 +32,24 @@ const schema = yup
   .required()
 
 const Login = ({ setUser }) => {
+  const signIn = useSignIn()
+  const navigate = useNavigate()
+  const isAuthenticated = useIsAuthenticated()
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      console.log('user is authenticatedddddddd')
+      // Redirect to Dashboard
+      navigate('/dashboard/home')
+    } else {
+      // Redirect to Login
+      console.log('user is not authenticated')
+    }
+  }, [])
+
   const [isPushing, setIspushing] = useState(false)
   const [isSuccess, setIsSuccess] = useState(null)
-
-  const navigate = useNavigate()
+  const errorRef = useRef(null)
 
   const {
     register,
@@ -52,15 +68,36 @@ const Login = ({ setUser }) => {
       .then((res) => {
         console.log(res)
 
-        setUser(res.data)
-        setIspushing(false)
-        setIsSuccess(true)
-        navigate('/dashboard/home')
+        if (
+          signIn({
+            token: res.data.token,
+            expiresIn: 30,
+            tokenType: 'string',
+            authState: res.data,
+            // refreshToken: res.data.refreshToken,                    // Only if you are using refreshToken feature
+            // refreshTokenExpireIn: res.data.refreshTokenExpireIn     // Only if you are using refreshToken feature
+          })
+        ) {
+          // Only if you are using refreshToken feature
+          // Redirect or do-something
+
+          setUser(res.data)
+          setIspushing(false)
+          setIsSuccess(true)
+          navigate('/dashboard/home')
+        } else {
+          //Throw error
+          window.notify()
+        }
       })
       .catch((err) => {
         console.log(err)
         setIspushing(false)
         setIsSuccess(false)
+        errorRef.current.classList.add('login__error--show')
+        setTimeout(() => {
+          errorRef.current.classList.remove('login__error--show')
+        }, 3000)
       })
   })
 
@@ -136,6 +173,9 @@ const Login = ({ setUser }) => {
             isSuccess={isSuccess}
             label="Log In"
           />
+          <div ref={errorRef} className="login__error">
+            Invalid email or password
+          </div>
         </form>
 
         <span className="login__form__subtitle login__form__subtitle--mob">

@@ -8,6 +8,7 @@ import { ReactComponent as Location } from '../../svg/location-point.svg'
 import { ReactComponent as Sku } from '../../svg/database.svg'
 import { ReactComponent as Status } from '../../svg/package.svg'
 import { ReactComponent as Estate } from '../../svg/estate.svg'
+import { ReactComponent as Arrow } from '../../svg/arrow-right.svg'
 
 const InfoModal = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -17,8 +18,6 @@ const InfoModal = () => {
     receiverData: { stageLocation: { latitude: 0, longitude: 0 } },
     senderData: { stageLocation: { latitude: 0, longitude: 0 } },
   })
-
-  console.log(data)
 
   useEffect(() => {
     window.showItem = (data, isOrder) => {
@@ -67,6 +66,8 @@ const InfoModal = () => {
               className={`infoModal__info__group ${
                 data.status === 'Processing'
                   ? 'exportItem__item--yellow'
+                  : data.status === 'Shipping'
+                  ? 'orderItem__item--blue'
                   : data.status === 'Delivered'
                   ? 'exportItem__item--green'
                   : data.status === 'Canceled'
@@ -101,6 +102,8 @@ const InfoModal = () => {
               className={`infoModal__info__route__shape ${
                 data.status === 'Processing'
                   ? 'infoModal__info__route__shape--processing'
+                  : data.status === 'Shipping'
+                  ? 'infoModal__info__route__shape--shipping'
                   : data.status === 'Delivered'
                   ? 'infoModal__info__route__shape--delivered'
                   : data.status === 'Canceled'
@@ -110,6 +113,8 @@ const InfoModal = () => {
             >
               <div className="infoModal__info__route__shape__indicator"></div>
               <Location className="infoModal__info__route__shape__icon" />
+
+              <Arrow className="infoModal__info__route__arrow" />
             </div>
 
             <div className="infoModal__info__route__group">

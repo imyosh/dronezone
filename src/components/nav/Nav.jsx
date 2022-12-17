@@ -1,6 +1,8 @@
 import React from 'react'
 import './nav.scss'
 
+import { useSignOut } from 'react-auth-kit'
+
 import { NavLink } from 'react-router-dom'
 
 import { ReactComponent as Logo } from '../../svg/logo.svg'
@@ -14,15 +16,18 @@ import { ReactComponent as Admin } from '../../svg/user.svg'
 import { connect } from 'react-redux'
 import { setUser } from '../../redux/components/user/userSlice'
 
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 const Nav = ({ setUser, facilityName, isAdmin }) => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
+  const signOut = useSignOut()
+
   const logout = () => {
     window.testConfirm('Logout', 'Are you sure you want to log out ?', () => {
       setTimeout(() => {
         setUser(null)
-        navigate('/login')
+        signOut()
+        // navigate('/login')
       }, 300)
     })
   }
@@ -100,8 +105,8 @@ const Nav = ({ setUser, facilityName, isAdmin }) => {
 }
 
 const mapStateToProps = (state) => ({
-  facilityName: state.user.user.facilityName,
-  isAdmin: state.user.user.isAdmin,
+  facilityName: state.user ? state.user.user.facilityName : null,
+  isAdmin: state.user ? state.user.user.isAdmin : null,
 })
 
 const mapDispatchToProps = { setUser }

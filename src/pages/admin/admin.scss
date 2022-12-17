@@ -9,6 +9,22 @@
     color: #404040;
   }
 
+  &__copy {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.3rem;
+    background: #5dd5a8;
+    transition: background 0.3s;
+    cursor: pointer;
+    svg {
+      fill: #fff;
+    }
+
+    &:hover {
+      background: #1daa76;
+    }
+  }
+
   &__header {
     display: flex;
     align-items: center;

@@ -9,8 +9,17 @@ import networkExportsSlice from '../components/networkExports/networkExportsSlic
 import projectsReducer from '../components/projects/projectsSlice'
 import adminNodesSlice from '../components/admin/adminNodesSlice'
 
-export const store = configureStore({
-  reducer: combineReducers({
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(
+  persistConfig,
+  combineReducers({
     user: userReducer,
     exports: exportsSlice,
     requests: requestsSlice,
@@ -18,5 +27,11 @@ export const store = configureStore({
     networkExports: networkExportsSlice,
     projects: projectsReducer,
     admin: adminNodesSlice,
-  }),
+  })
+)
+
+export const store = configureStore({
+  reducer: persistedReducer,
 })
+
+export let persistor = persistStore(store)

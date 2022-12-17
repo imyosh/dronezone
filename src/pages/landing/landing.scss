@@ -184,6 +184,11 @@
     justify-content: center;
   }
 
+  .login__get {
+    height: 5rem !important;
+    width: 11rem !important;
+  }
+
   .input__label {
     font-size: 1.5rem;
   }
@@ -223,5 +228,13 @@
   .landing__logo__container--mob {
     display: flex;
     margin-top: 5rem;
+  }
+
+  .custom-modal {
+    width: 90%;
+  }
+
+  .notifyModal {
+    width: 27rem;
   }
 }

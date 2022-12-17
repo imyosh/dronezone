@@ -1,11 +1,8 @@
 .infoModal {
   width: 43vw;
   height: 42vh;
-
   min-width: 65rem;
-
   min-height: 28rem;
-
   display: flex;
   gap: 2rem;
 
@@ -16,7 +13,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-
     height: 100%;
     width: 45%;
 
@@ -102,6 +98,16 @@
         gap: 0.5rem;
       }
 
+      &__arrow {
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        top: 1rem;
+        right: 50%;
+        transform: translateX(50%);
+        fill: #bdbdbd;
+      }
+
       &__shape {
         height: 0.3rem;
         width: 30%;
@@ -149,13 +155,27 @@
         }
 
         &--processing {
-          .requestModal__info__route__shape__indicator {
+          .infoModal__info__route__shape__indicator {
             background: #dfc32f;
+            left: -16%;
+            transform: translateX(50%);
+          }
+          .infoModal__info__route__shape__icon {
+            fill: #dfc32f;
+            left: -21.5%;
+            transform: translateX(50%);
+            visibility: visible;
+          }
+        }
+
+        &--shipping {
+          .infoModal__info__route__shape__indicator {
+            background: #1cbee1;
             right: 50%;
             transform: translateX(50%);
           }
-          .requestModal__info__route__shape__icon {
-            fill: #dfc32f;
+          .infoModal__info__route__shape__icon {
+            fill: #1cbee1;
             right: 50%;
             transform: translateX(50%);
             visibility: visible;
@@ -163,11 +183,11 @@
         }
 
         &--delivered {
-          .requestModal__info__route__shape__indicator {
+          .infoModal__info__route__shape__indicator {
             background: #77da7b;
             right: -1rem;
           }
-          .requestModal__info__route__shape__icon {
+          .infoModal__info__route__shape__icon {
             fill: #77da7b;
             right: 50%;
             right: -1.2rem;
@@ -184,7 +204,7 @@
             background: #fc626e;
           }
 
-          .requestModal__info__route__shape__indicator {
+          .infoModal__info__route__shape__indicator {
             visibility: hidden;
           }
         }

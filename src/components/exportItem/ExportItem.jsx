@@ -1,22 +1,14 @@
 import React from 'react'
 import './exportItem.scss'
 
-let colors = [
-  '#FFE6AE',
-  'rgb(255 220 241)',
-  '#FFF1CB',
-  '#E3FCEF',
-  '#ECEDF2',
-  '#D3ECFF',
-]
-
+import { getColor } from '../../functions'
 const ExportItem = ({ item, index, setToDeleteItem }) => {
   return (
     <div className="exportItem">
       <div className="exportItem__info">
         <div
           style={{
-            background: colors[index],
+            background: getColor(index),
           }}
           className="exportItem__img__container"
         >

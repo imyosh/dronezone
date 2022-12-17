@@ -7,14 +7,7 @@ import { updateRequstStatus } from '../../functions/crud'
 import { updateOrder } from '../../redux/components/orders/ordersSlice'
 import { connect } from 'react-redux'
 
-let colors = [
-  '#FFE6AE',
-  'rgb(255 220 241)',
-  '#FFF1CB',
-  '#E3FCEF',
-  '#ECEDF2',
-  '#D3ECFF',
-]
+import { getColor } from '../../functions'
 
 const OrderItem = ({ item, index, updateOrder }) => {
   return (
@@ -22,7 +15,7 @@ const OrderItem = ({ item, index, updateOrder }) => {
       <div className="orderItem__info">
         <div
           style={{
-            background: colors[index],
+            background: getColor(index),
           }}
           className="orderItem__img__container"
         >
@@ -49,6 +42,8 @@ const OrderItem = ({ item, index, updateOrder }) => {
         className={`orderItem__item ${
           item.status === 'Processing'
             ? 'orderItem__item--yellow'
+            : item.status === 'Shipping'
+            ? 'orderItem__item--blue'
             : item.status === 'Delivered'
             ? 'orderItem__item--green'
             : item.status === 'Canceled'
@@ -83,34 +78,61 @@ const OrderItem = ({ item, index, updateOrder }) => {
             }}
             className="orderItem__action__item"
           >
-            Fulfill order
+            Start Fulfilling
           </div>
         ) : item.status === 'Delivered' || item.status === 'Canceled' ? null : (
           <>
-            <div
-              onClick={(e) => {
-                e.stopPropagation()
-                window.testConfirm(
-                  'Delivere order',
-                  'Mark the order as Delivered ?',
-                  () => {
-                    console.log('update')
-                    updateRequstStatus('Delivered', item._id, item.data._id)
-                      .then((res) => {
-                        console.log(res)
-                        updateOrder(res.data)
-                      })
-                      .catch((err) => {
-                        console.log(err)
-                      })
-                  },
-                  'green'
-                )
-              }}
-              className="orderItem__action__item"
-            >
-              Complete
-            </div>
+            {item.status === 'Processing' ? (
+              <div
+                onClick={(e) => {
+                  e.stopPropagation()
+                  window.testConfirm(
+                    'Delivere order',
+                    'Mark the order as Shipping ?',
+                    () => {
+                      console.log('update')
+                      updateRequstStatus('Shipping', item._id, item.data._id)
+                        .then((res) => {
+                          console.log(res)
+                          updateOrder(res.data)
+                        })
+                        .catch((err) => {
+                          console.log(err)
+                        })
+                    },
+                    'green'
+                  )
+                }}
+                className="orderItem__action__item"
+              >
+                Shipping
+              </div>
+            ) : (
+              <div
+                onClick={(e) => {
+                  e.stopPropagation()
+                  window.testConfirm(
+                    'Delivere order',
+                    'Mark the order as Delivered ?',
+                    () => {
+                      console.log('update')
+                      updateRequstStatus('Delivered', item._id, item.data._id)
+                        .then((res) => {
+                          console.log(res)
+                          updateOrder(res.data)
+                        })
+                        .catch((err) => {
+                          console.log(err)
+                        })
+                    },
+                    'green'
+                  )
+                }}
+                className="orderItem__action__item"
+              >
+                Complete
+              </div>
+            )}
 
             <div
               onClick={(e) => {

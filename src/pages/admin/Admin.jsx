@@ -6,11 +6,15 @@ import { connect } from 'react-redux'
 import Search from '../../components/search/Search'
 import Node from '../../components/node/Node'
 
+import { ReactComponent as Copy } from '../../svg/copy-alt.svg'
+import { ReactComponent as Check } from '../../svg/check.svg'
+
 import { getNetworkUsers } from '../../functions/crud'
 import { setAdminNodes } from '../../redux/components/admin/adminNodesSlice'
 
 const Admin = ({ networkNodes, setAdminNodes, networkId }) => {
   const [search, setSearch] = useState('')
+  const [copied, setIsCopied] = useState(false)
 
   const filteredItems =
     search.length === 0
@@ -32,6 +36,21 @@ const Admin = ({ networkNodes, setAdminNodes, networkId }) => {
       })
   }, [])
 
+  const copyId = () => {
+    navigator.clipboard.writeText(networkId).then(
+      function () {
+        setIsCopied(true)
+
+        setTimeout(() => {
+          setIsCopied(false)
+        }, 500)
+      },
+      function (err) {
+        alert('Unable to copy !')
+      }
+    )
+  }
+
   return (
     <div className="admin">
       <div className="admin__header">
@@ -39,7 +58,12 @@ const Admin = ({ networkNodes, setAdminNodes, networkId }) => {
         <Search search={search} setSearch={setSearch} />
       </div>
 
-      <div className="admin__id">ID : {networkId}</div>
+      <div className="admin__id">
+        ID : {networkId}
+        <div onClick={copyId} className="admin__copy">
+          {copied ? <Check /> : <Copy />}
+        </div>
+      </div>
 
       <div className="admin__items">
         {filteredItems.length !== 0 ? (
@@ -54,7 +78,7 @@ const Admin = ({ networkNodes, setAdminNodes, networkId }) => {
 
 const mapStateToProps = (state) => ({
   networkNodes: state.admin,
-  networkId: state.user.user.networkId,
+  networkId: state.user ? state.user.user.networkId : null,
 })
 
 const mapDispatchToProps = { setAdminNodes }

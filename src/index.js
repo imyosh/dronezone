@@ -4,9 +4,13 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 import { Provider } from 'react-redux'
-import { store } from './redux/store/store'
+import { store, persistor } from './redux/store/store'
+
+import { PersistGate } from 'redux-persist/integration/react'
 
 import Axios from 'axios'
+
+import { ReactComponent as Logo } from '../src/svg/logo.svg'
 
 // Axios.defaults.baseURL = 'http://18.117.221.18:8080'
 Axios.defaults.baseURL = 'http://localhost:8868'
@@ -14,10 +18,13 @@ Axios.defaults.baseURL = 'http://localhost:8868'
 window.rr = () => store.getState()
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
+
 root.render(
   // <React>
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>
   // </React>
 )

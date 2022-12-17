@@ -3,14 +3,7 @@ import './requestItem.scss'
 
 import moment from 'moment'
 
-let colors = [
-  '#FFE6AE',
-  'rgb(255 220 241)',
-  '#FFF1CB',
-  '#E3FCEF',
-  '#ECEDF2',
-  '#D3ECFF',
-]
+import { getColor } from '../../functions'
 
 const RequestItem = ({ item, index, setToDeleteItem }) => {
   return (
@@ -18,7 +11,7 @@ const RequestItem = ({ item, index, setToDeleteItem }) => {
       <div className="requestItem__info">
         <div
           style={{
-            background: colors[index],
+            background: getColor(index),
           }}
           className="requestItem__img__container"
         >
@@ -42,6 +35,8 @@ const RequestItem = ({ item, index, setToDeleteItem }) => {
         className={`requestItem__item ${
           item.status === 'Processing'
             ? 'requestItem__item--yellow'
+            : item.status === 'Shipping'
+            ? 'orderItem__item--blue'
             : item.status === 'Delivered'
             ? 'requestItem__item--green'
             : item.status === 'Canceled'

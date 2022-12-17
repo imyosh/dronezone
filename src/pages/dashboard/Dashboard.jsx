@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './dashboard.scss'
 
-import { Routes, Route } from 'react-router-dom'
+import { useAuthUser } from 'react-auth-kit'
+
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Nav from '../../components/nav/Nav'
@@ -11,16 +13,14 @@ import Exports from '../export/Exports'
 import Orders from '../orders/Orders'
 import Admin from '../admin/Admin'
 
-import { useNavigate } from 'react-router-dom'
+import { setUser } from '../../redux/components/user/userSlice'
 
-const Dashboard = ({ user }) => {
-  const navigate = useNavigate()
+// import { useNavigate } from 'react-router-dom'
 
-  useEffect(() => {
-    if (!user) navigate('/login')
-  }, [user, navigate])
-
-  if (!user) return null
+const Dashboard = ({ setUser }) => {
+  const auth = useAuthUser()
+  console.log('setting user')
+  setUser(auth())
 
   return (
     <div className="dashboard">
@@ -31,13 +31,13 @@ const Dashboard = ({ user }) => {
         <Route path="exports" element={<Exports />}></Route>
         <Route path="orders" element={<Orders />}></Route>
         <Route path="admin" element={<Admin />}></Route>
+
+        <Route path="*" element={<Navigate to="/dashboard/home" />} />
       </Routes>
     </div>
   )
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-})
+const mapDispatchToProps = { setUser }
 
-export default connect(mapStateToProps)(Dashboard)
+export default connect(null, mapDispatchToProps)(Dashboard)

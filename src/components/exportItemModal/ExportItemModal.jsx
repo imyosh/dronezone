@@ -53,6 +53,7 @@ const ExportItemModal = ({ addExport, updateExport }) => {
         .catch((err) => console.log(err))
       setToEditExport(null)
     } else {
+      window.loading('Export Item', 'Adding an item to the network.')
       addExportToNetwork({
         ...data,
         quantity: Number(data.quantity),
@@ -61,9 +62,11 @@ const ExportItemModal = ({ addExport, updateExport }) => {
         .then((res) => {
           console.log(res)
           addExport(res.data)
+          window.finishLoading()
         })
         .catch((err) => {
           console.log(err)
+          window.notify()
         })
     }
 

@@ -8,3 +8,16 @@ export function getBase64(file, func) {
     console.log('Error: ', error)
   }
 }
+
+let colors = [
+  '#FFE6AE',
+  'rgb(255 220 241)',
+  '#FFF1CB',
+  '#E3FCEF',
+  '#ECEDF2',
+  '#D3ECFF',
+]
+
+export const getColor = (i) => {
+  return colors[i % colors.length]
+}
